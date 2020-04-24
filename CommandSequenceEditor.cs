@@ -38,7 +38,11 @@ namespace HammerCmdSeqEditor
                         com.ensure_check = reader.ReadInt32();
                         com.ensure_file = ReadChars(ref reader, 260);
                         com.use_proc_win = reader.ReadInt32();
-                        com.no_wait = reader.ReadInt32();
+
+                        if(data.version == 0.2f)
+                        {
+                            com.no_wait = reader.ReadInt32();
+                        }
 
                         seq.commands.Add(com);
                     }
@@ -80,7 +84,10 @@ namespace HammerCmdSeqEditor
                         writer.Write(com.ensure_check);
                         WriteChars(ref writer, com.ensure_file, 260);
                         writer.Write(com.use_proc_win);
-                        writer.Write(com.no_wait);
+                        if (data.version == 0.2f)
+                        {
+                            writer.Write(com.no_wait);
+                        }
                     }
                 }
 
